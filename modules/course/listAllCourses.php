@@ -17,9 +17,10 @@ if($conn->connect_error){
     if ($result->num_rows > 0) {
         while($row[] = $result->fetch_assoc()) {
             $item = $row;
-            $json = json_encode($item,JSON_UNESCAPED_UNICODE);
-            echo ($json);
         }
+        $json = json_encode($item,JSON_UNESCAPED_UNICODE);
+        http_response_code(200);
+        echo $json;
     }
     else
     {

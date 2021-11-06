@@ -15,18 +15,12 @@ if($conn->connect_error){
     $json = file_get_contents('php://input');
     $obj = json_decode($json,JSON_UNESCAPED_UNICODE);
     
-    $name=$obj['name'];
-    $credit=$obj['credit'];
-    $type=$obj['type'];
-    $course=$obj['course'];
-    $semestre=$obj['semestre'];
-    $id_teacher=$obj['id_teacher'];
-    $id_grade=$obj['id_grade'];
+    $identification_number=$obj['identification_number'];
 
-    $sql = "INSERT INTO course( name, credit, type, course, semestre, id_teacher, id_grade) VALUES ('$name','$credit','$type','$course','$semestre','$id_teacher','$id_grade')";
+    $sql = "DELETE FROM person WHERE identification_number='$identification_number' and person_type='student'";
 
     if(mysqli_query($conn,$sql)){
-        $res['message']="Se ha registrado al curso correctamente";
+        $res['message']="Se ha eliminado la persona correctamente";
         http_response_code(201);
         echo json_encode($res,JSON_UNESCAPED_UNICODE);
         $conn->close();

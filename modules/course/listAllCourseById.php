@@ -23,6 +23,7 @@ if($conn->connect_error){
         while($row[] = $result->fetch_assoc()) {
             $item = $row;
             $json = json_encode($item,JSON_UNESCAPED_UNICODE);
+            http_response_code(202);
             echo ($json);
         }
     }

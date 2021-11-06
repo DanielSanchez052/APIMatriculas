@@ -15,12 +15,12 @@ if($conn->connect_error){
     $json = file_get_contents('php://input');
     $obj = json_decode($json,JSON_UNESCAPED_UNICODE);
     
-    $identification_number=$obj['identification_number'];
+    $name=$obj['name'];
 
-    $sql = "DELETE FROM person WHERE identification_number='$identification_number'";
+    $sql = "INSERT INTO grades( name) VALUES ('$name')";
 
     if(mysqli_query($conn,$sql)){
-        $res['message']="Se ha eliminado la persona correctamente";
+        $res['message']="Se ha registrado el grado correctamente";
         http_response_code(201);
         echo json_encode($res,JSON_UNESCAPED_UNICODE);
         $conn->close();

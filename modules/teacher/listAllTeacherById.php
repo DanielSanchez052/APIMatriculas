@@ -17,7 +17,10 @@ if($conn->connect_error){
 
     $identification_number= isset($obj['identification_number']) ? $obj['identification_number'] : null;
 
-    $sql = "SELECT*FROM person WHERE identification_number='$identification_number'";
+    $sql = "select p.id_person, p.identification_number, p.name, p.last_name, p.second_last_name, p.city, p.direction, p.phone_number, p.date_born, p.gender, p.person_type, d.name department from person p
+    inner join teacher t on t.id_teacher=p.id_person
+    inner join department d on d.id_department=t.id_department
+    where p.person_type='teacher' and identification_number='$identification_number'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while($row[] = $result->fetch_assoc()) {

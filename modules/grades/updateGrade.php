@@ -15,19 +15,14 @@ if($conn->connect_error){
     $json = file_get_contents('php://input');
     $obj = json_decode($json,JSON_UNESCAPED_UNICODE);
     
-    $name=$obj['name'];
-    $credit=$obj['credit'];
-    $type=$obj['type'];
-    $course=$obj['course'];
-    $semestre=$obj['semestre'];
-    $id_teacher=$obj['id_teacher'];
     $id_grade=$obj['id_grade'];
+    $name=$obj['name'];
 
-    $sql = "INSERT INTO course( name, credit, type, course, semestre, id_teacher, id_grade) VALUES ('$name','$credit','$type','$course','$semestre','$id_teacher','$id_grade')";
+    $sql = "UPDATE grades SET name='$name' WHERE id_grade=$id_grade";
 
     if(mysqli_query($conn,$sql)){
-        $res['message']="Se ha registrado al curso correctamente";
-        http_response_code(201);
+        $res['message']="Se ha actualizado el grado correctamente";
+        http_response_code(202);
         echo json_encode($res,JSON_UNESCAPED_UNICODE);
         $conn->close();
     }else{

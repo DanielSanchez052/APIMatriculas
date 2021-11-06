@@ -8,25 +8,27 @@ header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Author
 include './connection/paramsDB.php';
 
 $conn = mysqli_connect($hostName,$DBUser,$DBPass,$DBName);
-$conn->query("SET NAMES 'utf8'");
 
 if($conn->connect_error){
     die("La conexion a la BD Falló: ".$conn->connect_error);
 }else{
-    $sql = "SELECT*FROM student_course";
+    $json =  file_get_contents('php://input');
+    $obj = json_decode($json,JSON_UNESCAPED_UNICODE);
+    
+    $id_department= isset($obj['id_department']) ? $obj['id_department'] : null;
+    $sql = "SELECT*FROM department where id_department = '$id_department'";
+
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while($row[] = $result->fetch_assoc()) {
             $item = $row;
+            $json = json_encode($item,JSON_UNESCAPED_UNICODE);
+            http_response_code(202);
+            echo ($json);
         }
-        http_response_code(200);
-        $json = json_encode($item,JSON_UNESCAPED_UNICODE);
-        echo ($json);
-        $conn->close();
-
     }
     else
     {
-    echo "No hay Nada para mostrar";
+    echo "No hay cursos para mostrar";
     }
 }
