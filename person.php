@@ -11,13 +11,13 @@ if($method == 'POST'){
     include 'modules/person/insertPerson.php';
 }elseif($method == 'GET' && file_get_contents('php://input') == null){
     include 'modules/person/listAllPersons.php';
-//}
-// elseif($method == 'GET' && file_get_contents('php://input') != null){
-//     include 'ShowStudentxId.php';
-// }elseif($method == 'PUT'){
-//     include 'UpdateStudentRecord.php';
-// }elseif($method == 'DELETE'){
-//     include 'DeleteStudentRecord.php';
+}
+elseif($method == 'GET' && file_get_contents('php://input') != null){
+    include 'modules/person/listAllPersonById.php';
+}elseif($method == 'PUT'){
+    include 'modules/person/updatePerson.php';
+}elseif($method == 'DELETE'){
+    include 'modules/person/deletePerson.php';
 }else{
     http_response_code(405);
     echo "Method $method Not Alowed";

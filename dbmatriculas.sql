@@ -22,6 +22,9 @@ SET time_zone = "+00:00";
 -- Base de datos: `dbmatriculas`
 --
 
+CREATE DATABASE dbmatriculas;
+USE dbmatriculas;
+
 -- --------------------------------------------------------
 
 --
