@@ -24,9 +24,10 @@ if($conn->connect_error){
     $phone_number=$obj['phone_number'];
     $date_born=$obj['date_born'];
     $gender=$obj['gender'];
+    $person_type=$obj['person_type'];
     $password=$obj['password'];
 
-    $sql = "UPDATE person SET name='$name',last_name='$last_name',second_last_name='$second_last_name',city='$city',direction='$direction',phone_number='$phone_number',date_born='$date_born',gender='$gender',password='$password' WHERE identification_number='$identification_number' and person_type='student'";
+    $sql = "UPDATE person SET name='$name',last_name='$last_name',second_last_name='$second_last_name',city='$city',direction='$direction',phone_number='$phone_number',date_born='$date_born',gender='$gender',person_type='$person_type',password='$password' WHERE identification_number='$identification_number'";
 
     if(mysqli_query($conn,$sql)){
         $res['message']="Se ha actualizado la persona correctamente";

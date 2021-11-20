@@ -24,12 +24,13 @@ if($conn->connect_error){
     $phone_number=$obj['phone_number'];
     $date_born=$obj['date_born'];
     $gender=$obj['gender'];
+    $person_type=$obj['person_type'];
     $password=$obj['password'];
 
-    $sql = "UPDATE person SET name='$name',last_name='$last_name',second_last_name='$second_last_name',city='$city',direction='$direction',phone_number='$phone_number',date_born='$date_born',gender='$gender',password='$password' WHERE identification_number='$identification_number' and person_type='student'";
+    $sql = "INSERT INTO person(identification_number, name, last_name, second_last_name, city, direction, phone_number, date_born, gender, person_type, password) VALUES ('$identification_number','$name','$last_name','$second_last_name','$city','$direction','$phone_number','$date_born','$gender','$person_type','$password')";
 
     if(mysqli_query($conn,$sql)){
-        $res['message']="Se ha actualizado la persona correctamente";
+        $res['message']="Se ha registrado la persona correctamente";
         http_response_code(201);
         echo json_encode($res,JSON_UNESCAPED_UNICODE);
         $conn->close();

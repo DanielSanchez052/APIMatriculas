@@ -12,12 +12,7 @@ $conn = mysqli_connect($hostName,$DBUser,$DBPass,$DBName);
 if($conn->connect_error){
     die("La conexion a la BD Falló: ".$conn->connect_error);
 }else{
-    // $json =  file_get_contents('php://input');
-    // $obj = json_decode($json,JSON_UNESCAPED_UNICODE);
-
-    $identification_number= isset($_GET["identification_number"]) ? $_GET["identification_number"] : null;
-
-    $sql = "SELECT*FROM person WHERE identification_number='$identification_number' and person_type='student'";
+    $sql = "SELECT*FROM person";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while($row[] = $result->fetch_assoc()) {
