@@ -1,18 +1,18 @@
 <?php
-// header('Access-Control-Allow-Oroigin: *');
-// header('Access-Control-Allow-Credentials: ture');
-// header('Access-Control-Allow-Methods: POST, DELETE, GET, PUT'); 
-// header('Access-Control-Allow-Max-Age: 1000');
-// header('Access-Control-Allow-Headers: Origin, Content-Type');
+header('Access-Control-Allow-Origin: *'); 
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Allow-Methods: POST, DELETE, GET, PUT, OPTIONS'); 
+header('Access-Control-Allow-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Origin, Content-Type ');
 // Importar la conexion
 $method = $_SERVER['REQUEST_METHOD'];
 
 if($method == 'POST'){
     include 'modules/course/insertCourse.php';
-}elseif($method == 'GET' && file_get_contents('php://input') == null){
+}elseif($method == 'GET' && !isset($_GET["id_course"])){
     include 'modules/course/listAllCourses.php';
 }
-elseif($method == 'GET' && file_get_contents('php://input') != null){
+elseif($method == 'GET' && isset($_GET["id_course"])){
     include 'modules/course/listAllCourseById.php';
 }elseif($method == 'PUT'){
     include 'modules/course/updateCourse.php';

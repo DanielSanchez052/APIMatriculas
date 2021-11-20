@@ -15,7 +15,8 @@ if($conn->connect_error){
     $json =  file_get_contents('php://input');
     $obj = json_decode($json,JSON_UNESCAPED_UNICODE);
     
-    $id_department= isset($obj['id_department']) ? $obj['id_department'] : null;
+    $id_department= isset($_GET["id_department"]) ? $_GET["id_department"] : null;
+    
     $sql = "SELECT*FROM department where id_department = '$id_department'";
 
     $result = $conn->query($sql);
